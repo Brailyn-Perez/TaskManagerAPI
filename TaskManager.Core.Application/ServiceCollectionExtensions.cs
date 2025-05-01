@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection.Metadata;
+using TaskManager.Core.Application.Assemblies;
 using TaskManager.Core.Application.Behaviours;
 
 namespace TaskManager.Core.Application

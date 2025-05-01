@@ -6,6 +6,10 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.UpdateTaskComm
 {
     public class UpdateTaskCommand : IRequest<Response<int>>
     {
+        public string Description { get; set; }
+        public string Status { get; set; }
+        public DateTime DueDate { get; set; }
+        public bool IsCompleted { get; set; }
     }
 
     public class UpdateTaskCommandHandler : IRequestHandler<UpdateTaskCommand, Response<int>>

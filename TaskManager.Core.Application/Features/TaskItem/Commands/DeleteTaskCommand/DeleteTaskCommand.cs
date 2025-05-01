@@ -6,7 +6,7 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.DeleteTaskComm
 {
     public class DeleteTaskCommand : IRequest<Response<int>>
     {
-
+        public int Id { get; set; }
     }
 
     public class DeleteTaskCommandHandler : IRequestHandler<DeleteTaskCommand, Response<int>>

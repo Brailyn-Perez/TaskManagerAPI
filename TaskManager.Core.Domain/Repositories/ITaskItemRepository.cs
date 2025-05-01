@@ -2,7 +2,7 @@
 
 namespace TaskManager.Core.Domain.Repositories
 {
-    public interface ITaskItemRepository
+    public interface ITaskItemRepository : IGenericRepository<TaskItem>
     {
         
     }
