@@ -18,9 +18,16 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.DeleteTaskComm
             _repository = repository;
         }
 
-        public Task<Response<int>> Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
+        public async Task<Response<int>> Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var Record = await _repository.GetByIdAsync(request.Id);
+            if (Record == null)
+            {
+                throw new KeyNotFoundException($"Task with id {request.Id} not found.");
+            }
+
+            await _repository.DeleteAsync(Record);
+            return new Response<int>(request.Id, "Task deleted successfully.");
         }
     }
 }

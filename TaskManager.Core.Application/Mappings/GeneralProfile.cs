@@ -12,7 +12,9 @@ namespace TaskManager.Core.Application.Mappings
         {
             CreateMap<TaskItem, CreateTaskCommand>();
             CreateMap<CreateTaskCommand, TaskItem>();
+
             CreateMap<TaskItem, UpdateTaskCommand>();
+            CreateMap<UpdateTaskCommand, TaskItem>();
         }
     }
 }
