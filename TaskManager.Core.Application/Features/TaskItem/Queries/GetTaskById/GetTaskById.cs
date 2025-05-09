@@ -19,9 +19,23 @@ namespace TaskManager.Core.Application.Features.TaskItem.Queries.GetTaskById
             _repository = repository;
         }
 
-        public Task<Response<TaskItemDTO>> Handle(GetTaskById request, CancellationToken cancellationToken)
+        public async Task<Response<TaskItemDTO>> Handle(GetTaskById request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var taskItem = await _repository.GetByIdAsync(request.Id);
+            if (taskItem == null)
+            {
+                throw new KeyNotFoundException($"Task with ID {request.Id} not found.");
+            }
+            var taskItemDTO = new TaskItemDTO
+            {
+                Id = taskItem.Id,
+                Description = taskItem.Description,
+                Status = taskItem.Status,
+                DueDate = taskItem.DueDate,
+                IsCompleted = taskItem.IsCompleted,
+                AditionalData = taskItem.AditionalData
+            };
+            return new Response<TaskItemDTO>(taskItemDTO, "Task retrieved successfully.");
         }
     }
 }

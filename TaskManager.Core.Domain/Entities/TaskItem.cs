@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json;
-using TaskManager.Core.Domain.Common;
+﻿using TaskManager.Core.Domain.Common;
 
 namespace TaskManager.Core.Domain.Entities
 {
@@ -10,7 +8,6 @@ namespace TaskManager.Core.Domain.Entities
         public string Status { get; set; } = "Pending";
         public DateTime DueDate { get; set; }
         public bool IsCompleted { get; set; }
-
+        public string? AditionalData { get; set; }
     }
-
 }
