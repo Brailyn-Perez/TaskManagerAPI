@@ -29,7 +29,7 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.UpdateTaskComm
 
         public async Task<Response<int>> Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
         {
-            var taskItem = await _repository.GetByIdAsync(request.Id);
+            var taskItem = await _repository.GetByIdAsync(request.Id,cancellationToken);
 
             if (taskItem == null)
             {
@@ -43,7 +43,7 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.UpdateTaskComm
             }
             var newRecord = _mapper.Map(request, taskItem);
 
-            await _repository.UpdateAsync(newRecord);
+            await _repository.UpdateAsync(newRecord, cancellationToken);
             return new Response<int>(newRecord.Id, "Task updated successfully.");
         }
     }

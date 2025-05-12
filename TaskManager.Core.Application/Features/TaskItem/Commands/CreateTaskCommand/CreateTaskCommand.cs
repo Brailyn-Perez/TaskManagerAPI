@@ -35,7 +35,7 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.CreateTaskComm
             }
 
             var Record = _mapper.Map<CreateTaskCommand, Domain.Entities.TaskItem>(request);
-            var result = await _repository.AddAsync(Record);
+            var result = await _repository.AddAsync(Record,cancellationToken);
 
             return new Response<int>(result, "Task created successfully");
         }

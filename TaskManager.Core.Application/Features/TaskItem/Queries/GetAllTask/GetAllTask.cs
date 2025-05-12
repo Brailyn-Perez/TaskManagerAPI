@@ -21,7 +21,7 @@ namespace TaskManager.Core.Application.Features.TaskItem.Queries.GetAllTask
 
         public async Task<Response<IEnumerable<TaskItemDTO>>> Handle(GetAllTask request, CancellationToken cancellationToken)
         {
-            var taskItems = await _repository.GetAllAsync();
+            var taskItems = await _repository.GetAllAsync(cancellationToken);
             if (taskItems == null)
             {
                 throw new KeyNotFoundException("No tasks found.");

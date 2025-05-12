@@ -20,13 +20,13 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.DeleteTaskComm
 
         public async Task<Response<int>> Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
         {
-            var Record = await _repository.GetByIdAsync(request.Id);
+            var Record = await _repository.GetByIdAsync(request.Id, cancellationToken);
             if (Record == null)
             {
                 throw new KeyNotFoundException($"Task with id {request.Id} not found.");
             }
 
-            await _repository.DeleteAsync(Record);
+            await _repository.DeleteAsync(Record, cancellationToken);
             return new Response<int>(request.Id, "Task deleted successfully.");
         }
     }

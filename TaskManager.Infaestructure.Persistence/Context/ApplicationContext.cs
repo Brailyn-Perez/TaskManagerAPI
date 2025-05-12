@@ -55,6 +55,32 @@ namespace TaskManager.Infaestructure.Persistence.Context
             return base.SaveChanges();
         }
 
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.CreatedDate = DateTime.Now;
+                        entry.Entity.CreatedBy = "DefaultAppUser";
+                        break;
+                    case EntityState.Modified:
+                        entry.Entity.LastModifiedDate = DateTime.Now;
+                        entry.Entity.LastModifiedBy = "DefaultAppUser";
+                        break;
+                    case EntityState.Deleted:
+                        entry.Entity.IsDeleted = true;
+                        entry.Entity.DeletedDate = DateTime.Now;
+                        entry.Entity.DeletedBy = "DefaultAppUser";
+                        entry.State = EntityState.Modified;
+                        break;
+                }
+            }
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
         #region DbSets
         public DbSet<TaskItem> Tasks { get; set; }
         #endregion
