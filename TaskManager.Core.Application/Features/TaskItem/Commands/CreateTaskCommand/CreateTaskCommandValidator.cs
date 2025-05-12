@@ -15,11 +15,6 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.CreateTaskComm
                 .NotNull()
                 .NotEmpty();
 
-            RuleFor(x => x.Status)
-                .NotEmpty()
-                .NotNull()
-                .MaximumLength(50);
-
             RuleFor(x => x.DueDate)
                 .NotEmpty()
                 .NotNull()

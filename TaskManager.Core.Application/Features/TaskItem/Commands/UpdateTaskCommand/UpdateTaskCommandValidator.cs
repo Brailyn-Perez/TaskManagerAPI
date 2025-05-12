@@ -15,9 +15,7 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.UpdateTaskComm
 
             RuleFor(x => x.Status)
                 .NotEmpty()
-                .WithMessage("Status is required.")
-                .Must(status => status == "Pending" || status == "InProgress" || status == "Completed")
-                .WithMessage("Status must be either 'Pending', 'InProgress', or 'Completed'.");
+                .WithMessage("Status is required.");
 
             RuleFor(x => x.DueDate)
                 .NotEmpty()

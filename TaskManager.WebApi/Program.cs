@@ -2,6 +2,7 @@ using TaskManager.Infaestructure.Persistence;
 using TaskManager.Core.Application;
 using TaskManager.WebApi.Middlewares;
 using TaskManager.WebApi.Extensions;
+using System.Text.Json.Serialization;
 
 namespace TaskManager.WebApi
 {
@@ -13,10 +14,26 @@ namespace TaskManager.WebApi
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(s =>
+            {
+
+                s.UseInlineDefinitionsForEnums();
+                s.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Title = "Task Manager API",
+                    Version = "v1",
+                    Description = "API for managing tasks"
+                });
+
+            });
             builder.Services.AddPersistenceServices(builder.Configuration);
             builder.Services.AddApplicationServices();
             builder.Services.AddApiVersioningExtension();

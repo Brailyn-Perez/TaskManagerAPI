@@ -32,7 +32,6 @@ namespace TaskManager.Core.Application.Features.TaskItem.Queries.GetTaskById
                 Description = taskItem.Description,
                 Status = taskItem.Status,
                 DueDate = taskItem.DueDate,
-                IsCompleted = taskItem.IsCompleted,
                 AditionalData = taskItem.AditionalData
             };
             return new Response<TaskItemDTO>(taskItemDTO, "Task retrieved successfully.");

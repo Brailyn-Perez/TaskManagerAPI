@@ -4,6 +4,7 @@ using TaskManager.Core.Application.Features.TaskItem.Commands.DeleteTaskCommand;
 using TaskManager.Core.Application.Features.TaskItem.Commands.UpdateTaskCommand;
 using TaskManager.Core.Application.Features.TaskItem.Queries.GetAllTask;
 using TaskManager.Core.Application.Features.TaskItem.Queries.GetTaskById;
+using TaskManager.Core.Domain.Enums;
 using TaskManager.WebApi.Controllers.v1.Base;
 
 namespace TaskManager.WebApi.Controllers.v1.Taks
@@ -45,7 +46,7 @@ namespace TaskManager.WebApi.Controllers.v1.Taks
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllTasks()
+        public async Task<IActionResult> GetAllTasks([FromQuery] StatusTask statusTask)
         {
             var result = await Mediator.Send(new GetAllTask());
             return Ok(result);

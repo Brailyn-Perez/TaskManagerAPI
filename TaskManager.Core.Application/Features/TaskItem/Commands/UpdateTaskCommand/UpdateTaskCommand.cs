@@ -2,6 +2,7 @@
 using MediatR;
 using System.Text.Json;
 using TaskManager.Core.Application.Wrapper;
+using TaskManager.Core.Domain.Enums;
 using TaskManager.Core.Domain.Repositories;
 
 namespace TaskManager.Core.Application.Features.TaskItem.Commands.UpdateTaskCommand
@@ -10,9 +11,8 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.UpdateTaskComm
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public string Status { get; set; }
+        public StatusTask Status { get; set; }
         public DateTime DueDate { get; set; }
-        public bool IsCompleted { get; set; }
         public string? AditionalData { get; set; }
     }
 
@@ -29,7 +29,7 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.UpdateTaskComm
 
         public async Task<Response<int>> Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
         {
-            var taskItem = await _repository.GetByIdAsync(request.Id,cancellationToken);
+            var taskItem = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
             if (taskItem == null)
             {

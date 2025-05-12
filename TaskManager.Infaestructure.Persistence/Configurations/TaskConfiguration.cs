@@ -26,7 +26,6 @@ namespace TaskManager.Infaestructure.Persistence.Configurations
 
             builder.Property(d => d.DueDate);
 
-            builder.Property(i => i.IsCompleted);
         }
     }
 }

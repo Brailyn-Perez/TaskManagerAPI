@@ -2,6 +2,7 @@
 using MediatR;
 using System.Text.Json;
 using TaskManager.Core.Application.Wrapper;
+using TaskManager.Core.Domain.Enums;
 using TaskManager.Core.Domain.Repositories;
 
 namespace TaskManager.Core.Application.Features.TaskItem.Commands.CreateTaskCommand
@@ -9,9 +10,8 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.CreateTaskComm
     public class CreateTaskCommand : IRequest<Response<int>>
     {
         public string Description { get; set; }
-        public string Status { get; set; }
+        public StatusTask Status { get; set; }
         public DateTime DueDate { get; set; }
-        public bool IsCompleted { get; set; }
         public string? AditionalData { get; set; }
     }
 
