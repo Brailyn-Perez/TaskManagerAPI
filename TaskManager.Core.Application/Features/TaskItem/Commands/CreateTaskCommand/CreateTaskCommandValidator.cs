@@ -11,15 +11,15 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.CreateTaskComm
                 .NotNull()
                 .MaximumLength(250);
 
-            RuleFor(x => x.IsCompleted)
-                .NotNull()
-                .NotEmpty();
-
             RuleFor(x => x.DueDate)
                 .NotEmpty()
                 .NotNull()
                 .Must(date => date > DateTime.UtcNow)
                 .WithMessage("Due date must be in the future.");
+
+            RuleFor(x => x.Status)
+                .IsInEnum()
+                .WithMessage("Status must be a valid enum value.");
         }
     }
 }

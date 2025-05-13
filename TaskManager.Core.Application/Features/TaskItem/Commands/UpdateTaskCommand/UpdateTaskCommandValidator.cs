@@ -23,6 +23,10 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.UpdateTaskComm
                 .GreaterThan(DateTime.Now)
                 .WithMessage("Due date must be in the future.");
 
+            RuleFor(x => x.Status)
+                .IsInEnum()
+                .WithMessage("Status must be a valid enum value.");
+
         }
     }
 }
