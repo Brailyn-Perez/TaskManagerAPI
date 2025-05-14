@@ -47,13 +47,3 @@ Puedes probar los endpoints usando **Swagger**, **Postman** o cualquier cliente 
 * `PUT /api/tasks/{id}` - Actualiza una tarea existente
 * `DELETE /api/tasks/{id}` - Elimina una tarea
 
-## 📁 Estructura básica del modelo
-
-```csharp
-public class TaskItem
-{
-    public int Id { get; set; }
-    public string Title { get; set; }
-    public bool IsCompleted { get; set; }
-}
-```
