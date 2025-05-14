@@ -2,6 +2,7 @@
 using MediatR;
 using System.Text.Json;
 using TaskManager.Core.Application.Wrapper;
+using TaskManager.Core.Domain.Delegates;
 using TaskManager.Core.Domain.Enums;
 using TaskManager.Core.Domain.Repositories;
 
@@ -35,6 +36,12 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.CreateTaskComm
             }
 
             var Record = _mapper.Map<CreateTaskCommand, Domain.Entities.TaskItem>(request);
+            var validateTask = new ValidateTaskDelegate();
+            var isValid = await validateTask.ValidateTaskAsync(Record);
+            if (!isValid)
+            {
+                return new Response<int>(0, "Task validation failed");
+            }
             var result = await _repository.AddAsync(Record,cancellationToken);
 
             return new Response<int>(result, "Task created successfully");
