@@ -39,10 +39,12 @@ Puedes probar los endpoints usando **Swagger**, **Postman** o cualquier cliente 
 * `POST /api/tasks` - Crea una nueva tarea
 
   ```json
-  {
-    "title": "Estudiar .NET",
-    "isCompleted": false
-  }
+{
+  "description": "string",
+  "status": "Pending",
+  "dueDate": "2025-05-14T01:05:24.042Z",
+  "aditionalData": "string"
+}
   ```
 * `PUT /api/tasks/{id}` - Actualiza una tarea existente
 * `DELETE /api/tasks/{id}` - Elimina una tarea
