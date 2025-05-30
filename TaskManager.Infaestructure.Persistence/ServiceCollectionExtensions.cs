@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TaskManager.Core.Application.Factories;
 using TaskManager.Core.Domain.Repositories;
 using TaskManager.Infaestructure.Persistence.Context;
 using TaskManager.Infaestructure.Persistence.Repositories;
@@ -18,6 +19,7 @@ namespace TaskManager.Infaestructure.Persistence
 
             #region Repositories
             services.AddTransient<ITaskItemRepository, TaskItemRepository>();
+            services.AddTransient<ITaskFactory, Factories.TaskFactory>();
             #endregion
         }
     }

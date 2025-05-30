@@ -27,7 +27,6 @@ namespace TaskManager.WebApi.Controllers.v1.Taks
             {
                 Description = command.Description,
                 DueDate = command.DueDate,
-                Status = command.Status
             }, message =>
             {
                 Console.WriteLine($"Validación fallida: {message}");
