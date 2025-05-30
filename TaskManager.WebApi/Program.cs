@@ -24,8 +24,6 @@ namespace TaskManager.WebApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(s =>
             {
-
-                s.UseInlineDefinitionsForEnums();
                 s.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Title = "Task Manager API",

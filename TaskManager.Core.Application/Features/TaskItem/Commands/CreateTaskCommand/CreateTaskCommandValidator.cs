@@ -17,7 +17,7 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.CreateTaskComm
                 .Must(date => date > DateTime.UtcNow)
                 .WithMessage("Due date must be in the future.");
 
-            RuleFor(x => x.Status)
+            RuleFor(x => x.TaskType)
                 .IsInEnum()
                 .WithMessage("Status must be a valid enum value.");
         }

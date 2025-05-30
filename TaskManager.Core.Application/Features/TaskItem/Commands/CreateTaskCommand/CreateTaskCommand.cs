@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using System.Text.Json;
+using TaskManager.Core.Application.Factories;
 using TaskManager.Core.Application.Wrapper;
 using TaskManager.Core.Domain.Enums;
 using TaskManager.Core.Domain.Repositories;
@@ -10,8 +11,8 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.CreateTaskComm
     public class CreateTaskCommand : IRequest<Response<int>>
     {
         public string Description { get; set; }
-        public StatusTask Status { get; set; }
         public DateTime DueDate { get; set; }
+        public TaskType TaskType { get; set; }
         public string? AditionalData { get; set; }
     }
 
@@ -19,11 +20,13 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.CreateTaskComm
     {
         private readonly ITaskItemRepository _repository;
         private readonly IMapper _mapper;
+        private readonly ITaskFactory _taskFactory;
 
-        public CreateTaskCommandHandler(ITaskItemRepository repository, IMapper mapper)
+        public CreateTaskCommandHandler(ITaskItemRepository repository, IMapper mapper, ITaskFactory taskFactory)
         {
             _repository = repository;
             _mapper = mapper;
+            _taskFactory = taskFactory;
         }
 
         public async Task<Response<int>> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
@@ -33,10 +36,9 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.CreateTaskComm
                 string json = JsonSerializer.Serialize(request.AditionalData);
                 request.AditionalData = json;
             }
-
-            var Record = _mapper.Map<CreateTaskCommand, Domain.Entities.TaskItem>(request);
-            var result = await _repository.AddAsync(Record,cancellationToken);
-
+            var task = _taskFactory.CreateTask(request.TaskType,request.Description,request.DueDate);
+            task.AditionalData = request.AditionalData;
+            var result = await _repository.AddAsync(task, cancellationToken);
             return new Response<int>(result, "Task created successfully");
         }
     }

@@ -31,12 +31,6 @@ namespace TaskManager.Core.Domain.Delegates
                     return false;
                 }
 
-                if (taskItem.Status != StatusTask.Pending)
-                {
-                    notify?.Invoke("El estado inicial debe ser 'Pending'.");
-                    return false;
-                }
-
                 return true;
             };
 
