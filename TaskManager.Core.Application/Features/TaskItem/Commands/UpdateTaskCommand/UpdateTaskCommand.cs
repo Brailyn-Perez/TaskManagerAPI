@@ -42,10 +42,14 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.UpdateTaskComm
                 string json = JsonSerializer.Serialize(request.AditionalData);
                 request.AditionalData = json;
             }
-            var newRecord = _mapper.Map(request, taskItem);
+            taskItem.Description = request.Description;
+            taskItem.Status = request.Status;
+            taskItem.DueDate = request.DueDate;
+            taskItem.AditionalData = request.AditionalData;
+            taskItem.Type = request.TaskType;
 
-            await _repository.UpdateAsync(newRecord, cancellationToken);
-            return new Response<int>(newRecord.Id, "Task updated successfully.");
+            await _repository.UpdateAsync(taskItem, cancellationToken);
+            return new Response<int>(taskItem.Id, "Task updated successfully.");
         }
     }
 }

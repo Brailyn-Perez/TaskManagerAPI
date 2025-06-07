@@ -8,7 +8,7 @@ namespace TaskManager.Core.Application.DTOs.TaskItem
         public string Description { get; set; }
         public StatusTask Status { get; set; }
         public DateTime DueDate { get; set; }
-        public bool IsCompleted { get; set; }
         public string AditionalData { get; set; }
+        public TaskType TaskType { get; set; }
     }
 }
