@@ -14,6 +14,7 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.UpdateTaskComm
         public StatusTask Status { get; set; }
         public DateTime DueDate { get; set; }
         public string? AditionalData { get; set; }
+        public TaskType TaskType { get; set; }
     }
 
     public class UpdateTaskCommandHandler : IRequestHandler<UpdateTaskCommand, Response<int>>

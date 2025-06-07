@@ -3,6 +3,7 @@ using MediatR;
 using System.Text.Json;
 using TaskManager.Core.Application.Factories;
 using TaskManager.Core.Application.Wrapper;
+using TaskManager.Core.Domain.Entities;
 using TaskManager.Core.Domain.Enums;
 using TaskManager.Core.Domain.Repositories;
 
@@ -36,8 +37,15 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.CreateTaskComm
                 string json = JsonSerializer.Serialize(request.AditionalData);
                 request.AditionalData = json;
             }
-            var task = _taskFactory.CreateTask(request.TaskType,request.Description,request.DueDate);
-            task.AditionalData = request.AditionalData;
+            Domain.Entities.TaskItem taskItem = new Domain.Entities.TaskItem
+            {
+                Description = request.Description,
+                DueDate = request.DueDate,
+                Type = request.TaskType,
+                AditionalData = request.AditionalData
+            };
+            var task = _taskFactory.CreateTask(taskItem);
+
             var result = await _repository.AddAsync(task, cancellationToken);
             return new Response<int>(result, "Task created successfully");
         }

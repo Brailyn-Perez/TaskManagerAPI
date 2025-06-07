@@ -9,5 +9,6 @@ namespace TaskManager.Core.Domain.Entities
         public StatusTask Status { get; set; }
         public DateTime DueDate { get; set; }
         public string? AditionalData { get; set; }
+        public TaskType Type { get; set; }
     }
 }
