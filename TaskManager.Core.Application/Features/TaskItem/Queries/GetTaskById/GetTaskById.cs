@@ -21,7 +21,7 @@ namespace TaskManager.Core.Application.Features.TaskItem.Queries.GetTaskById
 
         public async Task<Response<TaskItemDTO>> Handle(GetTaskById request, CancellationToken cancellationToken)
         {
-            var taskItem = await _repository.GetByIdAsync(request.Id,cancellationToken);
+            var taskItem = await _repository.GetByIdAsync(request.Id, cancellationToken);
             if (taskItem == null)
             {
                 throw new KeyNotFoundException($"Task with ID {request.Id} not found.");
@@ -32,7 +32,8 @@ namespace TaskManager.Core.Application.Features.TaskItem.Queries.GetTaskById
                 Description = taskItem.Description,
                 Status = taskItem.Status,
                 DueDate = taskItem.DueDate,
-                AditionalData = taskItem.AditionalData
+                AditionalData = taskItem.AditionalData,
+                TaskType = taskItem.Type
             };
             return new Response<TaskItemDTO>(taskItemDTO, "Task retrieved successfully.");
         }

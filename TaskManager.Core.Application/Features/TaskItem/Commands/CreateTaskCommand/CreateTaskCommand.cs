@@ -2,7 +2,9 @@
 using MediatR;
 using System.Text.Json;
 using TaskManager.Core.Application.Factories;
+using TaskManager.Core.Application.Interfaces;
 using TaskManager.Core.Application.Wrapper;
+using TaskManager.Core.Domain.Entities;
 using TaskManager.Core.Domain.Enums;
 using TaskManager.Core.Domain.Repositories;
 
@@ -21,12 +23,13 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.CreateTaskComm
         private readonly ITaskItemRepository _repository;
         private readonly IMapper _mapper;
         private readonly ITaskFactory _taskFactory;
-
-        public CreateTaskCommandHandler(ITaskItemRepository repository, IMapper mapper, ITaskFactory taskFactory)
+        private readonly IQueueTaskItemService _queueTaskItemService;
+        public CreateTaskCommandHandler(ITaskItemRepository repository, IMapper mapper, ITaskFactory taskFactory, IQueueTaskItemService queueTaskItemService)
         {
             _repository = repository;
             _mapper = mapper;
             _taskFactory = taskFactory;
+            _queueTaskItemService = queueTaskItemService;
         }
 
         public async Task<Response<int>> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
@@ -36,9 +39,24 @@ namespace TaskManager.Core.Application.Features.TaskItem.Commands.CreateTaskComm
                 string json = JsonSerializer.Serialize(request.AditionalData);
                 request.AditionalData = json;
             }
-            var task = _taskFactory.CreateTask(request.TaskType,request.Description,request.DueDate);
-            task.AditionalData = request.AditionalData;
-            var result = await _repository.AddAsync(task, cancellationToken);
+            Domain.Entities.TaskItem taskItem = new Domain.Entities.TaskItem
+            {
+                Description = request.Description,
+                DueDate = request.DueDate,
+                Type = request.TaskType,
+                AditionalData = request.AditionalData
+            };
+            var task = _taskFactory.CreateTask(taskItem);
+            var tcs = new TaskCompletionSource<int>();
+
+            _queueTaskItemService.AddTaskItem(task, async () =>
+            {
+                var createdId = await _repository.AddAsync(taskItem, cancellationToken);
+                tcs.SetResult(createdId);
+            }, cancellationToken);
+
+
+            int result = await tcs.Task;
             return new Response<int>(result, "Task created successfully");
         }
     }
