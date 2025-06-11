@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Core.Domain.Shared;
+using MediatR;
 using TaskManager.Core.Application.DTOs.TaskItem;
 using TaskManager.Core.Application.Wrapper;
 using TaskManager.Core.Domain.Repositories;
@@ -7,7 +8,7 @@ namespace TaskManager.Core.Application.Features.TaskItem.Queries.GetAllTask
 {
     public class GetAllTask : IRequest<Response<IEnumerable<TaskItemDTO>>>
     {
-
+        public GetAllTaskQuery query { get; set; }
     }
 
     public class GetAllTaskHandler : IRequestHandler<GetAllTask, Response<IEnumerable<TaskItemDTO>>>
@@ -21,7 +22,7 @@ namespace TaskManager.Core.Application.Features.TaskItem.Queries.GetAllTask
 
         public async Task<Response<IEnumerable<TaskItemDTO>>> Handle(GetAllTask request, CancellationToken cancellationToken)
         {
-            var taskItems = await _repository.GetAllAsync(cancellationToken);
+            var taskItems = await _repository.GetAllAsync(request.query, cancellationToken);
             if (taskItems == null)
             {
                 throw new KeyNotFoundException("No tasks found.");

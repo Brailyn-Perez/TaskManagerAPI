@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Core.Domain.Shared;
+using Microsoft.AspNetCore.Mvc;
 using TaskManager.Core.Application.Features.TaskItem.Commands.CreateTaskCommand;
 using TaskManager.Core.Application.Features.TaskItem.Commands.DeleteTaskCommand;
 using TaskManager.Core.Application.Features.TaskItem.Commands.UpdateTaskCommand;
@@ -70,9 +71,14 @@ namespace TaskManager.WebApi.Controllers.v1.Taks
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllTasks([FromQuery] StatusTask statusTask)
+        public async Task<IActionResult> GetAllTasks([FromQuery] GetAllTaskQuery filterQuery, CancellationToken cancellationToken)
         {
-            var result = await Mediator.Send(new GetAllTask());
+
+            var result = await Mediator.Send(new GetAllTask()
+            {
+                query = filterQuery
+
+            }, cancellationToken);
             return Ok(result);
         }
     }
