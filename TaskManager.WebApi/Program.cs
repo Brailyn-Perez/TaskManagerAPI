@@ -33,6 +33,7 @@ namespace TaskManager.WebApi
             builder.Services.AddApplicationServices();
             builder.Services.AddApiVersioningExtension();
             builder.Services.AddIdentityInfrastructure(builder.Configuration);
+            builder.Services.AddJwtInfrastructure(builder.Configuration);
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

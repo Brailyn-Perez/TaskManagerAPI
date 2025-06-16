@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TaskManager.Infraestructure.Identity.Context;
+using TaskManager.Infraestructure.Identity.Interfaces;
+using TaskManager.Infraestructure.Identity.Interfaces.Services;
+using TaskManager.Infraestructure.Identity.Repositories;
+using TaskManager.Infraestructure.Identity.Services;
 
 namespace TaskManager.Infraestructure.Identity
 {
@@ -23,6 +27,9 @@ namespace TaskManager.Infraestructure.Identity
             });
 
 
+            services.AddTransient<IUserManagerRepository, UserManagerRepository>();
+            services.AddTransient<IRoleManagerRepository, RoleManagerRepository>();
+            services.AddTransient<ISignInManagerRepository, SignInManagerRepository>();
 
             return services;
         }
