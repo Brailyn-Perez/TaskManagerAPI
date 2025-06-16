@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TaskManager.Infraestructure.Identity.Context;
 
 namespace TaskManager.Infraestructure.Identity
 {
@@ -16,7 +17,7 @@ namespace TaskManager.Infraestructure.Identity
 
             var connectionString = configuration.GetConnectionString("TaskManagerDB");
 
-            services.AddDbContext<IdentityDbContext>(options =>
+            services.AddDbContext<IdentityContext>(options =>
             {
                 options.UseSqlServer(connectionString);
             });

@@ -3,6 +3,7 @@ using TaskManager.Core.Application;
 using TaskManager.WebApi.Middlewares;
 using TaskManager.WebApi.Extensions;
 using System.Text.Json.Serialization;
+using TaskManager.Infraestructure.Identity;
 
 namespace TaskManager.WebApi
 {
@@ -31,6 +32,7 @@ namespace TaskManager.WebApi
             builder.Services.AddPersistenceServices(builder.Configuration);
             builder.Services.AddApplicationServices();
             builder.Services.AddApiVersioningExtension();
+            builder.Services.AddIdentityInfrastructure(builder.Configuration);
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
