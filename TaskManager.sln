@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Core.Application", "TaskManager.Core.Application\TaskManager.Core.Application.csproj", "{5C04B955-DA33-4A99-A91A-61B96C7311E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Infaestructure.Persistence", "TaskManager.Infaestructure.Persistence\TaskManager.Infaestructure.Persistence.csproj", "{BEC408EE-7CBE-4277-A003-81FED9AC45A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManager.Infraestructure.Identity", "TaskManager.Infraestructure.Identity\TaskManager.Infraestructure.Identity.csproj", "{183D40B4-719F-4539-90C6-4EC06835281D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{BEC408EE-7CBE-4277-A003-81FED9AC45A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEC408EE-7CBE-4277-A003-81FED9AC45A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEC408EE-7CBE-4277-A003-81FED9AC45A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{183D40B4-719F-4539-90C6-4EC06835281D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{183D40B4-719F-4539-90C6-4EC06835281D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{183D40B4-719F-4539-90C6-4EC06835281D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{183D40B4-719F-4539-90C6-4EC06835281D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{66FC0FCA-34F4-4CB5-9408-3E1131D71F57} = {D6EFD126-9CE6-4FBF-AE6A-EB3034536CE5}
 		{5C04B955-DA33-4A99-A91A-61B96C7311E9} = {D6EFD126-9CE6-4FBF-AE6A-EB3034536CE5}
 		{BEC408EE-7CBE-4277-A003-81FED9AC45A9} = {7A85FF3F-8C94-47F5-BEEC-EB589D1FFF15}
+		{183D40B4-719F-4539-90C6-4EC06835281D} = {7A85FF3F-8C94-47F5-BEEC-EB589D1FFF15}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F38490CC-7EFA-412B-BEFF-1404ED875C5A}
