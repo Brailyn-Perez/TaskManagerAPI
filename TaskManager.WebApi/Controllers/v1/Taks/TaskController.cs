@@ -1,4 +1,6 @@
 ﻿using Core.Domain.Shared;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TaskManager.Core.Application.Features.TaskItem.Commands.CreateTaskCommand;
 using TaskManager.Core.Application.Features.TaskItem.Commands.DeleteTaskCommand;
@@ -11,6 +13,7 @@ using TaskManager.WebApi.Controllers.v1.Base;
 
 namespace TaskManager.WebApi.Controllers.v1.Taks
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class TaskController : BaseApiController
     {
         [HttpPost]
