@@ -46,6 +46,7 @@ namespace TaskManager.WebApi
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();
+            app.MapHub<TaskManager.Core.Application.Hubs.Notifications>("hubs/notifications");
 
             app.UseMiddleware<ErrorHandlerMiddleware>();
 
