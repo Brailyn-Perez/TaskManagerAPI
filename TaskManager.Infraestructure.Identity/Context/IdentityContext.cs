@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using TaskManager.Infraestructure.Identity.Entities;
 
 namespace TaskManager.Infraestructure.Identity.Context
 {
@@ -15,5 +16,6 @@ namespace TaskManager.Infraestructure.Identity.Context
             base.OnModelCreating(builder);
         }
 
+       public virtual DbSet<RefreshToken> RefreshTokens { get; set; }
     }
 }

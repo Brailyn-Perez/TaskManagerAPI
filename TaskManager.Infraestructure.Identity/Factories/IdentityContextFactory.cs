@@ -9,7 +9,7 @@ namespace TaskManager.Infraestructure.Identity.Factories
         public IdentityContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<IdentityContext>();
-            optionsBuilder.UseSqlServer("EXAMPLE");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-E31TUKU\\SQLEXPRESS; Database=TaskManager; Trusted_Connection=True; TrustServerCertificate=True");
             return new IdentityContext(optionsBuilder.Options);
         }
     }

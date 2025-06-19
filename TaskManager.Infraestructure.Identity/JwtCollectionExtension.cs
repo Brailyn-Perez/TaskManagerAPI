@@ -41,7 +41,7 @@ namespace TaskManager.Infraestructure.Identity
             });
 
             services.AddSingleton(tokenValidationParams);
-            services.AddTransient<IjwtService, jwtService>();
+            services.AddTransient<IjwtService, JwtService>();
             return services;
         }
     }

@@ -15,9 +15,9 @@ namespace TaskManager.Infraestructure.Identity
     {
         public static IServiceCollection AddIdentityInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
-            {
-            });
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityContext>()
+                .AddDefaultTokenProviders();
 
             var connectionString = configuration.GetConnectionString("TaskManagerDB");
 
